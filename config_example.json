@@ -1,0 +1,11 @@
+{
+  "vfs_account_email":"",
+  "vfs_account_password":"",
+  "first_name":"",
+  "last_name":"",
+  "gender":"Female",
+  "passport_number": "",
+  "country_code": "",
+  "phone_number": "",
+  "email": ""
+}
