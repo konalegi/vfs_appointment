@@ -1,18 +1,46 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    axiom-types (0.1.1)
+      descendants_tracker (~> 0.0.4)
+      ice_nine (~> 0.11.0)
+      thread_safe (~> 0.3, >= 0.3.1)
     coderay (1.1.3)
+    coercible (1.0.0)
+      descendants_tracker (~> 0.0.1)
+    descendants_tracker (0.0.4)
+      thread_safe (~> 0.3, >= 0.3.1)
+    dry-inflector (1.0.0)
+    faraday (2.7.4)
+      faraday-net_http (>= 2.0, < 3.1)
+      ruby2_keywords (>= 0.0.4)
+    faraday-multipart (1.0.4)
+      multipart-post (~> 2)
+    faraday-net_http (3.0.2)
+    ice_nine (0.11.2)
     method_source (1.0.0)
+    multipart-post (2.3.0)
     pry (0.14.2)
       coderay (~> 1.1)
       method_source (~> 1.0)
     regexp_parser (2.6.2)
     rexml (3.2.5)
+    ruby2_keywords (0.0.5)
     rubyzip (2.3.2)
     selenium-webdriver (4.8.0)
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
+    telegram-bot-ruby (0.23.0)
+      dry-inflector
+      faraday (~> 2.0)
+      faraday-multipart (~> 1.0)
+      virtus (~> 2.0)
+    thread_safe (0.3.6)
+    virtus (2.0.0)
+      axiom-types (~> 0.1)
+      coercible (~> 1.0)
+      descendants_tracker (~> 0.0, >= 0.0.3)
     watir (7.2.2)
       regexp_parser (>= 1.2, < 3)
       selenium-webdriver (~> 4.2)
@@ -24,6 +52,7 @@ PLATFORMS
 DEPENDENCIES
   pry
   selenium-webdriver
+  telegram-bot-ruby
   watir
 
 BUNDLED WITH

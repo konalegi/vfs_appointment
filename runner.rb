@@ -3,6 +3,7 @@ require 'pry'
 require 'watir'
 require 'json'
 require 'logger'
+require 'telegram/bot'
 
 # options = Selenium::WebDriver::Chrome::Options.new()
 # Selenium::WebDriver::Chrome.driver_path = '/Users/jkonalegi/Documents/chrome-mac/Chromium.app'
@@ -97,21 +98,36 @@ def go_through_the_page(browser, config, logger)
   end
 
   logger.info("Appointment is available")
-  loop { `say "Appointment is available"` }
+  say("appointment is available")
 end
 
 config = JSON.parse(File.read('config.json'))
+
+if config['tg_token'] && config['tg_chat_id']
+  TG_BOT = Telegram::Bot::Client.new(config['tg_token'])
+  CHAT_ID = config['tg_chat_id']
+end
+
+def say(text)
+  return unless defined?(TG_BOT) && defined?(CHAT_ID)
+
+  TG_BOT.api.send_message(chat_id: CHAT_ID, text: text)
+end
+
 browser = Watir::Browser.start("https://visa.vfsglobal.com/tur/en/pol/login")
 browser.button(value: 'Accept All Cookies').wait_until(&:visible?).click()
 browser.text_field(id: "mat-input-0").set(config['vfs_account_email'])
 browser.text_field(id: "mat-input-1").set(config['vfs_account_password'])
 
-begin
-  sleep(20)
-  go_through_the_page(browser, config, logger)
+p 'press enter to continue'
+gets
+p 'starting the process'
 
+say('starting')
+
+begin
+  go_through_the_page(browser, config, logger)
 rescue AppointmentNotFound
-  first_attempt = false
   logger.error("couldn't get appointment, retrying")
 
   go_to_home_page(browser)
@@ -121,7 +137,7 @@ rescue AppointmentNotFound
   retry
 rescue => ex
   logger.error('failed')
-  `say "Failed"`
+  say('Failed')
   binding.pry
 end
 

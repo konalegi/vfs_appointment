@@ -7,5 +7,7 @@
   "passport_number": "",
   "country_code": "",
   "phone_number": "",
-  "email": ""
+  "email": "",
+  "tg_token": "",
+  "tg_chat_id": ""
 }
