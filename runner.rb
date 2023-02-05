@@ -133,7 +133,7 @@ rescue AppointmentNotFound
   go_to_home_page(browser)
 
   logger.info("waiting for 5 min before retrying")
-  sleep(300)
+  sleep(ENV.fetch("VFSA_WAIT_BETWEEN_RETRIES", 300).to_i)
   retry
 rescue => ex
   logger.error('failed')
